@@ -1,0 +1,18 @@
+suite: App
+suite_tags: @critical
+scenario: User will be able to navigate to the App
+step: login as user
+step: verify thing
+
+
+scenario: User will be able to see dashboard
+scenario_tags: @tag1 @tag2
+step: Open app
+step: click a thing
+step: verify another thing
+its a step
+
+suite: App - Area 2
+before: login and go to url:"/area2"
+scenario: User will be able to navigate to Smart Inbox
+step: verify thing was there
