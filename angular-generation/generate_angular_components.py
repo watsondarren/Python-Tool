@@ -1,3 +1,4 @@
+import string
 from read_from_file.read_from_file import read_file
 from create_angular_files import create_all_angular_files
 
@@ -13,6 +14,8 @@ for line in fl:
     for word in list_of_words:
         modified_word = word.replace("<", "").replace(">", "")
         naked_word = modified_word.replace("/", "")
+        cap_name = naked_word.replace("-", " ")
+        cap_name = string.capwords(cap_name).replace(" ", "")
         if not current_tag and word != "" and "<" in word and "<!" not in word and naked_word and naked_word != "h2" and naked_word != "h3":
             list_of_tags.append(naked_word)
             current_group.append(line)
