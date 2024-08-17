@@ -1,6 +1,6 @@
 ignoreWords = ["to", "the", "and", "a", "is", "as", "In", "in", "for", "on", "see", "of", "tab", "not", "this", "are",
                "that", "or", "", "all", "when", "was", "they", "but", "can", "you", "has", "there", "from", "&", "-",
-               "we", "be", "it", "if", "i", "their", "with", "an", "have"]
+               "we", "be", "it", "if", "i", "their", "with", "an", "have", "\\", ".", "by", "at", "/"]
 
 
 def process_lines(fl: str):
@@ -24,11 +24,6 @@ def return_lines_with_word(lines: list, word_or_phrase: str):
     return temp_lines
 
 
-def get_file_lines(file_path: str):
-    with open(file_path, "r") as f:
-        return f.readlines()
-
-
 def split_each_line_by(lines: list, delineator: str):
     separated = []
     for line in lines:
@@ -42,9 +37,7 @@ def get_words_with_word_count(lines: list, word_length_to_ignore: int = 0):
     for word in lines:
         word = word.lower()
         word = word.replace(":", "")
-        if word in ignoreWords:
-            continue
-        if "*" in word:
+        if word in ignoreWords or "*" in word:
             continue
         #     If you wish to only look at counts higher than a certain amount that goes here
         if len(word) < word_length_to_ignore:
@@ -65,10 +58,3 @@ def ignore_word_count(words_with_count: list, count_to_ignore: int):
             continue
         word_count_to_use[count[0]] = count[1]
     return word_count_to_use
-
-
-def write_results_to_file(file_name: str, list_of_results_to_write: list):
-    with open(file_name, "w") as file_to_write_to:
-        for line in list_of_results_to_write:
-            file_to_write_to.writelines(line)
-
